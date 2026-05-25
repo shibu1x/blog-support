@@ -6,10 +6,9 @@ on:
     branches:
       - main
     paths:
-      - 'Dockerfile'
-      - 'go.*'
-      - '**/*.go'
-      - '.dockerignore'
+      - "app/Dockerfile"
+      - "app/go.*"
+      - "app/**/*.go"
 
 env:
   REGISTRY: ghcr.io
@@ -27,19 +26,19 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
-          context: .
+          context: ./app
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-from: type=gha
@@ -47,6 +46,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
 
       - name: Cleanup old images from GitHub Container Registry
-        uses: dataaxiom/ghcr-cleanup-action@v1
+        uses: dataaxiom/ghcr-cleanup-action@374e2028c8fb93b7219f3771cd405fab95d3dec4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

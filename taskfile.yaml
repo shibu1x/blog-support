@@ -1,9 +1,9 @@
-version: '3'
+version: "3"
 
 env:
   NAME: blog_support
 
-dotenv: ['.env']
+dotenv: [".env"]
 
 tasks:
   build:
@@ -13,8 +13,9 @@ tasks:
           VERSION: latest
   amd:
     internal: true
+    dir: app
     cmds:
-      - | 
+      - |
         docker buildx build \
           --builder ${AMD64_BUILDER} \
           --platform linux/amd64 \
@@ -25,21 +26,11 @@ tasks:
 
   arm:
     internal: true
-    cmds:
-      - | 
-        docker buildx build \
-          --platform linux/arm64 \
-          --build-arg apt_cacher=${APT_CACHER} \
-          --push -t ${REGISTRY}/${NAME}:{{.VERSION}} .
-    silent: true
-
-  dev:
-    desc: Build development Docker image using Dockerfile.dev
+    dir: app
     cmds:
       - |
         docker buildx build \
           --platform linux/arm64 \
           --build-arg apt_cacher=${APT_CACHER} \
-          -f Dockerfile.dev \
-          --push -t ${REGISTRY}/${NAME}:dev .
+          --push -t ${REGISTRY}/${NAME}:{{.VERSION}} .
     silent: true

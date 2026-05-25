@@ -1,7 +1,16 @@
 services:
   dev:
-    # docker compose run --rm dev /bin/bash
+    # docker compose run --rm dev /bin/ash
     image: ${REGISTRY}/blog_support:dev
+    build:
+      context: ./app
+      dockerfile: Dockerfile.dev
     tty: true
+    environment:
+      POST_DIR:
+      AWS_REGION:
+      S3_BUCKET_NAME:
+      S3_KEY_PREFIX:
+      REMOTE_IMG_BASE_URL:
     volumes:
-      - .:/app:delegated
+      - ./app:/app
