@@ -85,7 +85,7 @@ docker compose run --rm dev ./main -P 2025
 # Build Docker image for ARM64 and push to registry
 task build
 
-# Build AMD64 image (requires env vars: AMD64_BUILDER, APT_CACHER, REGISTRY, REMOTE_HOST)
+# Build AMD64 image (requires env vars: AMD64_BUILDER, REGISTRY, REMOTE_HOST)
 task amd
 ```
 

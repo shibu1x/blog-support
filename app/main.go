@@ -38,9 +38,16 @@ func main() {
 		dateStr = args[0]
 	}
 
-	date, err := dateparse.ParseAny(dateStr)
-	if err != nil {
-		date = time.Now()
+	var date time.Time
+	if dateStr == "last" {
+		now := time.Now()
+		date = time.Date(now.Year(), now.Month()+1, 0, 0, 0, 0, 0, now.Location())
+	} else {
+		var err error
+		date, err = dateparse.ParseAny(dateStr)
+		if err != nil {
+			date = time.Now()
+		}
 	}
 
 	post := model.CreateNewPost(date, *number)
