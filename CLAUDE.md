@@ -9,7 +9,7 @@ This is a Go-based command-line tool for managing Hugo blog posts. It automates 
 ## Repository Structure
 
 ```
-blog_support/
+blog-support/
   app/                  # Go application source
     main.go
     model/post_model.go

@@ -7,7 +7,7 @@ import (
 
 	"github.com/araddon/dateparse"
 	"github.com/joho/godotenv"
-	"github.com/shibu1x/blog_support/model"
+	"github.com/shibu1x/blog-support/model"
 )
 
 func init() {

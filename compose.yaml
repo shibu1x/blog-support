@@ -1,7 +1,7 @@
 services:
   dev:
     # docker compose run --rm dev /bin/ash
-    image: ${REGISTRY}/blog_support:dev
+    image: ${REGISTRY}/blog-support:dev
     build:
       context: ./app
       dockerfile: Dockerfile.dev

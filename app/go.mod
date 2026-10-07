@@ -1,4 +1,4 @@
-module github.com/shibu1x/blog_support
+module github.com/shibu1x/blog-support
 
 go 1.24.0
 
